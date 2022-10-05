@@ -1628,7 +1628,7 @@ export default function Front4() {
         .WalletOfOwner(acc)
         .call();
       // let Price100 = await ULE_NFT_100_OF.methods.MinitngPricein_token().call();
-      let Price100 = mintingWirePrice * 100;
+      let Price100 = mintingWirePrice * 50;
 
       let walletLength = walletOfOwner100.length;
       console.log("walletOfOwner", walletLength, Price100);
@@ -1657,7 +1657,7 @@ export default function Front4() {
         .WalletOfOwner(acc)
         .call();
       // let Price200 = await ULE_NFT_200_OF.methods.MinitngPricein_token().call();
-      let Price200 = mintingWirePrice * 200;
+      let Price200 = mintingWirePrice * 100;
 
       let walletLength200 = walletOfOwner200.length;
       console.log("walletLength200", walletLength200, Price200);
@@ -1691,7 +1691,7 @@ export default function Front4() {
         .WalletOfOwner(acc)
         .call();
       // let Price300 = await ULE_NFT_300_OF.methods.MinitngPricein_token().call();
-      let Price300 = 300 * mintingWirePrice;
+      let Price300 = mintingWirePrice * 150;
 
       let walletLength300 = walletOfOwner300.length;
       console.log("walletOfOwner", walletLength300);
@@ -1725,7 +1725,7 @@ export default function Front4() {
         .call();
       // let Price400 = await ULE_NFT_400_OF.methods.MinitngPricein_token().call();
 
-      let Price400 = 400 * mintingWirePrice;
+      let Price400 = mintingWirePrice * 200;
       let walletLength400 = walletOfOwner400.length;
       console.log("walletOfOwner", walletLength400);
       setMyWalletLength(walletLength400);
@@ -1757,7 +1757,7 @@ export default function Front4() {
         .WalletOfOwner(acc)
         .call();
       // let Price500 = await ULE_NFT_500_OF.methods.MinitngPricein_token().call();
-      let Price500 = 500 * mintingWirePrice;
+      let Price500 = mintingWirePrice * 250;
 
       let walletLength500 = walletOfOwner500.length;
       console.log("walletOfOwner", walletLength500);
@@ -1792,7 +1792,7 @@ export default function Front4() {
       // let Price1000 = await ULE_NFT_1000_OF.methods
       //   .MinitngPricein_token()
       //   .call();
-      let Price1000 = 1000 * mintingWirePrice;
+      let Price1000 = mintingWirePrice * 500;
       let walletLength1000 = walletOfOwner1000.length;
       console.log("walletOfOwner", walletLength1000);
       setMyWalletLength(walletLength1000);
@@ -1826,7 +1826,7 @@ export default function Front4() {
       // let Price2000 = await ULE_NFT_2000_OF.methods
       //   .MinitngPricein_token()
       //   .call();
-      let Price2000 = 2000 * mintingWirePrice;
+      let Price2000 = mintingWirePrice * 1000;
       let walletLength2000 = walletOfOwner2000.length;
       console.log("walletOfOwner", walletLength2000);
       setMyWalletLength(walletLength2000);
@@ -1860,7 +1860,7 @@ export default function Front4() {
       // let Price3000 = await ULE_NFT_3000_OF.methods
       //   .MinitngPricein_token()
       //   .call();
-      let Price3000 = 3000 * mintingWirePrice;
+      let Price3000 = mintingWirePrice * 1500;
       let walletLength3000 = walletOfOwner3000.length;
       console.log("walletOfOwner", walletLength3000);
       setMyWalletLength(walletLength3000);
@@ -1892,7 +1892,7 @@ export default function Front4() {
       // let Price4000 = await ULE_NFT_4000_OF.methods
       //   .MinitngPricein_token()
       //   .call();
-      let Price4000 = 4000 * mintingWirePrice;
+      let Price4000 = mintingWirePrice * 2000;
       let walletLength4000 = walletOfOwner4000.length;
       console.log("walletOfOwner4000", walletOfOwner4000);
       setMyWalletLength(walletLength4000);
@@ -1930,7 +1930,7 @@ export default function Front4() {
       // let Price5000 = await ULE_NFT_5000_OF.methods
       //   .MinitngPricein_token()
       //   .call();
-      let Price5000 = 5000 * mintingWirePrice;
+      let Price5000 = mintingWirePrice * 2500;
       let walletLength5000 = walletOfOwner5000.length;
       console.log("walletOfOwner5000", walletLength5000);
       setMyWalletLength(walletLength5000);
@@ -1965,7 +1965,7 @@ export default function Front4() {
       // let Price10000 = await ULE_NFT_10000_OF.methods
       //   .MinitngPricein_token()
       //   .call();
-      let Price10000 = 10000 * mintingWirePrice;
+      let Price10000 = mintingWirePrice * 5000;
 
       let walletLength10000 = walletOfOwner10000.length;
       console.log("walletOfOwner", walletLength10000);

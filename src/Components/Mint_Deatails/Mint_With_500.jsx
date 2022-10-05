@@ -104,7 +104,7 @@ export default function Mint_With_500() {
     );
 
     const web3 = window.web3;
-    mintingULEPrice = value * mintingULEPrice?.data?.data[0]?.usdperunit * 500;
+    mintingULEPrice = value * mintingULEPrice?.data?.data[0]?.usdperunit * 250;
 
     mintingULEPrice = parseInt(mintingULEPrice).toFixed(1);
     setmintPriceWire(mintingULEPrice);
@@ -155,7 +155,7 @@ export default function Mint_With_500() {
             );
 
             mintingULEPrice =
-              value * mintingULEPrice?.data?.data[0]?.usdperunit * 500;
+              value * mintingULEPrice?.data?.data[0]?.usdperunit * 250;
 
             mintingULEPrice = parseInt(mintingULEPrice).toFixed(0);
             setmintPriceWire(mintingULEPrice);
@@ -168,7 +168,7 @@ export default function Mint_With_500() {
             );
 
             mintingBNBPrice =
-              value * mintingBNBPrice?.data?.data[0]?.usdperunit * 500;
+              value * mintingBNBPrice?.data?.data[0]?.usdperunit * 250;
 
             mintingBNBPrice = web3.utils.toWei(
               parseFloat(mintingBNBPrice).toString()

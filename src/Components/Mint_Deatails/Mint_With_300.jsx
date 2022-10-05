@@ -103,7 +103,7 @@ export default function Mint_With_300() {
       "https://ulematic-api.herokuapp.com/live_rate_Ule_bnb"
     );
     const web3 = window.web3;
-    mintingULEPrice = value * mintingULEPrice?.data?.data[0]?.usdperunit * 300;
+    mintingULEPrice = value * mintingULEPrice?.data?.data[0]?.usdperunit * 150;
 
     mintingULEPrice = parseInt(mintingULEPrice).toFixed(1);
     setmintPriceWire(mintingULEPrice);
@@ -161,7 +161,7 @@ export default function Mint_With_300() {
             );
 
             mintingULEPrice =
-              value * mintingULEPrice?.data?.data[0]?.usdperunit * 300;
+              value * mintingULEPrice?.data?.data[0]?.usdperunit * 150;
 
             mintingULEPrice = parseInt(mintingULEPrice).toFixed(0);
             setmintPriceWire(mintingULEPrice);
@@ -174,7 +174,7 @@ export default function Mint_With_300() {
             );
 
             mintingBNBPrice =
-              value * mintingBNBPrice?.data?.data[0]?.usdperunit * 300;
+              value * mintingBNBPrice?.data?.data[0]?.usdperunit * 150;
 
             mintingBNBPrice = web3.utils.toWei(
               parseFloat(mintingBNBPrice).toString()

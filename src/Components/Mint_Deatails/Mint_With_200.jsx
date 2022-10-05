@@ -102,7 +102,7 @@ export default function Mint_With_200() {
     let mintingULEPrice = await axios.get(
       "https://ulematic-api.herokuapp.com/live_rate_Ule_bnb"
     );
-    mintingULEPrice = value * mintingULEPrice?.data?.data[0]?.usdperunit * 200;
+    mintingULEPrice = value * mintingULEPrice?.data?.data[0]?.usdperunit * 100;
     mintingULEPrice = parseInt(mintingULEPrice).toFixed(1);
     setmintPriceWire(mintingULEPrice);
   };
@@ -158,7 +158,7 @@ export default function Mint_With_200() {
               "https://ulematic-api.herokuapp.com/live_rate_Ule_bnb"
             );
             mintingULEPrice =
-              value * mintingULEPrice?.data?.data[0]?.usdperunit * 200;
+              value * mintingULEPrice?.data?.data[0]?.usdperunit * 100;
             mintingULEPrice = parseInt(mintingULEPrice).toFixed(0);
             setmintPriceWire(mintingULEPrice);
             mintingULEPrice = web3.utils.toWei(mintingULEPrice);
@@ -168,7 +168,7 @@ export default function Mint_With_200() {
             );
 
             mintingBNBPrice =
-              value * mintingBNBPrice?.data?.data[0]?.usdperunit * 200;
+              value * mintingBNBPrice?.data?.data[0]?.usdperunit * 100;
 
             mintingBNBPrice = web3.utils.toWei(
               parseFloat(mintingBNBPrice).toString()
@@ -345,7 +345,7 @@ export default function Mint_With_200() {
         "https://ulematic-api.herokuapp.com/live_rate_Ule_bnb"
       );
       console.log("YULE ", mintingWirePrice?.data?.data[0]?.usdperunit);
-      // mintingWirePrice = mintingWirePrice?.data?.data[0]?.usdperunit * 200;
+      // mintingWirePrice = mintingWirePrice?.data?.data[0]?.usdperunit * 100;
       mintingWirePrice = mintingWirePrice?.data?.data[0]?.usdperunit;
 
       mintingWirePrice = parseFloat(mintingWirePrice).toFixed(1);
