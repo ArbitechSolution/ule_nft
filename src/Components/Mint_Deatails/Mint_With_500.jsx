@@ -42,7 +42,7 @@ export default function Mint_With_500() {
     if (NetId == 56) {
       let acc = await loadWeb3();
     } else {
-      toast.error("Wrong Newtwork please connect to BSC MainNet");
+      toast.error("Wrong Newtwork please connect to BSC Mainnet");
     }
 
     await window.ethereum.enable();
@@ -106,7 +106,7 @@ export default function Mint_With_500() {
     if (acc == "No Wallet") {
       toast.error("No Wallet Connected");
     } else if (acc == "Wrong Network") {
-      toast.error("Wrong Newtwork please connect to BSC MainNet ");
+      toast.error("Wrong Newtwork please connect to BSC Mainnet ");
     } else {
       try {
         console.log("value_change", value);
@@ -274,7 +274,7 @@ export default function Mint_With_500() {
     if (acc == "No Wallet") {
       toast.error("No Wallet Connected");
     } else if (acc == "Wrong Network") {
-      toast.error("Wrong Newtwork please connect to BSC MainNet ");
+      toast.error("Wrong Newtwork please connect to BSC Mainnet ");
     } else {
       try {
         // console.log("inputdatahere", inputdatahere);
@@ -500,7 +500,7 @@ export default function Mint_With_500() {
     if (acc == "No Wallet") {
       toast.error("No Wallet Connected");
     } else if (acc == "Wrong Network") {
-      toast.error("Wrong Newtwork please connect to BSC MainNet ");
+      toast.error("Wrong Newtwork please connect to BSC Mainnet ");
     } else {
       try {
         // console.log("inputdatahere", inputdatahere);
