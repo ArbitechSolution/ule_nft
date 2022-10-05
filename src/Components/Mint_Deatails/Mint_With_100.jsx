@@ -90,7 +90,23 @@ export default function Mint_With_100() {
       console.log("setValue", value);
     }
   };
+  const handleValueChange = async () => {
+    let mintingULEPrice = await axios.get(
+      "https://ulematic-api.herokuapp.com/live_rate_Ule_bnb"
+    );
+    mintingULEPrice = value * mintingULEPrice?.data?.data[0]?.usdperunit * 100;
 
+    mintingULEPrice = parseInt(mintingULEPrice).toFixed(1);
+    setmintPriceWire(mintingULEPrice);
+  };
+  const handleChange = async (e) => {
+    if (value > 0 && value < 6) {
+      setValue(e.target.value);
+      handleValueChange();
+    } else {
+      setValue(e.target.value);
+    }
+  };
   // const myMintBNB = async () => {
   //   // console.log("res",inputValue)
   //   setShowModal(false);
@@ -261,7 +277,6 @@ export default function Mint_With_100() {
   const myMintWire = async () => {
     let acc = await loadWeb3();
     let simplleArray = [];
-    // console.log("ACC=",acc)
     if (acc == "No Wallet") {
       toast.error("No Wallet Connected");
     } else if (acc == "Wrong Network") {
@@ -277,7 +292,6 @@ export default function Mint_With_100() {
         // if (res == 1) {
         try {
           setButtonTwo("Please Wait While Processing");
-          // console.log("mintFor Wire");
           const web3 = window.web3;
           let nftContractOf = new web3.eth.Contract(
             ULE_NFT_100_ABI,
@@ -289,12 +303,8 @@ export default function Mint_With_100() {
             wireTokenAddress
           );
           let totalnft = await nftContractOf.methods.maxBatchSize().call();
-          // let signature = await getSignatureTest(acc);
-          // console.log("signature", signature);
-          // console.log("totalnft", totalnft);
-          // let balance = web3.eth.getAccount();
+
           let accountBalance = await web3.eth.getBalance(acc);
-          // console.log("account", account);
           if (value > totalnft) {
             toast.error(`Maximum Limit is ${totalnft} `);
           } else {
@@ -305,7 +315,6 @@ export default function Mint_With_100() {
             let maxLimitprTransaction = await nftContractOf.methods
               .maxBatchSize()
               .call();
-            // let mintingWirePrice = await nftContractOf.methods.ValueinULE().call()
             let mintingULEPrice = await axios.get(
               "https://ulematic-api.herokuapp.com/live_rate_Ule_bnb"
             );
@@ -314,19 +323,23 @@ export default function Mint_With_100() {
               value * mintingULEPrice?.data?.data[0]?.usdperunit * 100;
 
             mintingULEPrice = parseInt(mintingULEPrice).toFixed(0);
+            setmintPriceWire(mintingULEPrice);
             mintingULEPrice = web3.utils.toWei(mintingULEPrice);
+
+            // let val1 = 10;
+            // mintingULEPrice = web3.utils.toWei(parseFloat(val1).toString());
+            // console.log("mintingULEPrice", mintingULEPrice);
             let mintingBNBPrice = await axios.get(
               "https://ulematic-api.herokuapp.com/live_rate_bnb"
             );
-
             mintingBNBPrice =
               value * mintingBNBPrice?.data?.data[0]?.usdperunit * 100;
-
             mintingBNBPrice = web3.utils.toWei(
               parseFloat(mintingBNBPrice).toString()
             );
-            // let val = 0.00001;
+            // let val = 0.000001;
             // mintingBNBPrice = web3.utils.toWei(parseFloat(val).toString());
+            // console.log("mintingBNBPrice", mintingBNBPrice);
             if (parseInt(ttlSupply) < parseInt(maxSupply)) {
               if (value < parseInt(maxLimitprTransaction)) {
                 if (parseFloat(accountBalance) > parseFloat(mintingBNBPrice)) {
@@ -356,11 +369,9 @@ export default function Mint_With_100() {
                   let walletOfOwner100 = await nftContractOf.methods
                     .WalletOfOwner(acc)
                     .call();
-                  console.log("walletOfOwner", walletOfOwner100);
 
                   let LastIndex_array = walletOfOwner100.slice(1).slice(-value);
                   let walletLength = LastIndex_array.length;
-                  console.log("walletOfOwner", walletLength);
                   for (let i = 0; i < walletLength; i++) {
                     try {
                       let res = await axios.get(
@@ -368,7 +379,6 @@ export default function Mint_With_100() {
                       );
                       let imageUrl = res.config.url;
                       setImgeURL(imageUrl);
-                      console.log("check", res, imageUrl);
 
                       let dna = walletOfOwner100[i];
                       simplleArray = [
@@ -397,10 +407,7 @@ export default function Mint_With_100() {
                       //   "txn": hash
                     }
                   );
-
-                  console.log("postapi", postapi);
                   toast.success("Success", postapi.data.data);
-
                   setButtonTwo("Mint With YULE");
                   setinputdatahere(" ");
                 } else {
@@ -416,22 +423,12 @@ export default function Mint_With_100() {
               toast.error("Max Supply is Greater than total Supply");
               setButtonTwo("Mint With YULE");
             }
-
-            // }
-            // else {
-
-            // }
           }
         } catch (e) {
           console.log("Error while minting ", e);
           toast.error("Transaction failed");
           setButtonTwo("Mint With YULE");
         }
-        // } else {
-        //     toast.error("User Is Not Exists")
-        //     setinputdatahere(" ")
-
-        // }
       } catch (e) {
         console.log("Transaction failed", e);
         toast.error("Transaction failed");
@@ -644,23 +641,25 @@ export default function Mint_With_100() {
       //   let mintingWirePrice = await axios.get(
       //     "https://ule-nft-api-1.herokuapp.com/100UsdInUle?id=1"
       //   );
-      let mintingWirePrice = await axios.get(
+      let mintingULEPrice = await axios.get(
         "https://ulematic-api.herokuapp.com/live_rate_Ule_bnb"
       );
-      console.log("YULE ", mintingWirePrice?.data?.data[0]?.usdperunit);
-      mintingWirePrice = mintingWirePrice?.data?.data[0]?.usdperunit;
-      mintingWirePrice = parseFloat(mintingWirePrice).toFixed(1);
-      setmintPriceWire(mintingWirePrice);
+      console.log("YULE ", mintingULEPrice?.data?.data[0]?.usdperunit);
+      mintingULEPrice = mintingULEPrice?.data?.data[0]?.usdperunit * 100;
+      // mintingWirePrice = mintingWirePrice?.data?.data[0]?.usdperunit;
+      mintingULEPrice = parseFloat(mintingULEPrice).toFixed(1);
+      mintingULEPrice = web3.utils.toWei(mintingULEPrice);
+      setmintPriceWire(mintingULEPrice);
 
       //   let mintingbnbPrice = await nftContractOf.methods.Valueinbnb().call();
       // mintingbnbPrice = mintingbnbPrice[0]
-      let mintingbnbPrice = await axios.get(
-        "https://ulematic-api.herokuapp.com/live_rate_bnb"
-      );
-      mintingbnbPrice = web3.utils.fromWei(mintingbnbPrice);
-      console.log("mintingbnbPrice", mintingbnbPrice);
-      mintingbnbPrice = parseFloat(mintingbnbPrice).toFixed(4);
-      setMintPriceBnb(mintingbnbPrice);
+      // let mintingbnbPrice = await axios.get(
+      //   "https://ulematic-api.herokuapp.com/live_rate_bnb"
+      // );
+      // mintingbnbPrice = web3.utils.fromWei(mintingbnbPrice).toString();
+      // console.log("mintingbnbPrice", mintingbnbPrice);
+      // mintingbnbPrice = parseFloat(mintingbnbPrice).toFixed(4);
+      // setMintPriceBnb(mintingbnbPrice);
     } catch (e) {
       console.log("Error while getting minting Price", e);
     }
@@ -687,10 +686,13 @@ export default function Mint_With_100() {
     setShowModal(false);
   };
   useEffect(() => {
-    setInterval(() => {
-      getMydata();
-    }, 10000);
-  }, []);
+    handleValueChange();
+  }, [value]);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     // handleChange();
+  //   }, 10000);
+  // }, []);
 
   return (
     <div>
@@ -742,17 +744,10 @@ export default function Mint_With_100() {
                             className="bcs"
                             type="number"
                             name="number"
-                            onChange={(e) => setValue(e.target.value)}
+                            onChange={(e) => handleChange(e)}
                             value={value}
                           ></input>
 
-                          {/* <div className="btn-area1 mt-5">
-                                                        <a class="btn btn-box " onClick={() => myMintBNB()}>
-                                                            <span className="">{btnOne}</span>
-                                                        </a>
-
-                                                        <p className="fs-4 ms-4 text-white">Price : {mintPriceBnb} BNB</p>
-                                                    </div> */}
                           <div className="btn-area1 mt-5">
                             <a class="btn btn-box" onClick={() => myMintWire()}>
                               {btnTwo}
@@ -764,12 +759,6 @@ export default function Mint_With_100() {
                               Price : {mintPriceWire} YULE
                             </p>
                           </div>
-                          {/* <div className="btn-area1 mt-5">
-                                                        <a class="btn btn-box" onClick={() => myMintBUSD()}>
-                                                            {btnThree}
-                                                        </a>
-                                                        <p className="fs-4 text-white">Price : {mintPriceBUSD} BUSD</p>
-                                                    </div> */}
                         </div>
                       </div>
                     </div>
