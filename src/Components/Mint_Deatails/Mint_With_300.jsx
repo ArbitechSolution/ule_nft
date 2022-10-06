@@ -7,23 +7,15 @@ import { loadWeb3 } from "../../apis/api";
 import {
   ULE_NFT_300,
   ULE_NFT_300_ABI,
-  wireNftContractAbi,
-  ULE_NFT_100,
-  ULE_NFT_100_ABI,
-  wireNftContractAddress,
 } from "../../utilies/Bsc_contract";
-import {
-  busdNftTokenAddress,
-  busdNftTokenAbi,
-} from "../../utilies/Bsc_contract";
-import { wireTokenAddress, wireTokenAbi } from "../../utilies/Bsc_contract";
+
+import { uleTokenAddress, uleTokenAbi } from "../../utilies/Bsc_contract";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { getSignatureTest } from "../../apis/signature";
 
 import Web3 from "web3";
-import { Link } from "react-router-dom";
 
 export default function Mint_With_300() {
   let [btnTxt, setBtTxt] = useState("Connect");
@@ -66,35 +58,18 @@ export default function Mint_With_300() {
   let [imageArray, setImageArray] = useState([]);
 
   let [value, setValue] = useState(1);
-  let [point, setPoint] = useState(0);
   let [mintPriceBnb, setMintPriceBnb] = useState(0);
   let [mintPriceBUSD, setMintPriceBUSD] = useState(0);
   let [mintPriceWire, setmintPriceWire] = useState(0);
-  let [btnOne, setButtonOne] = useState("Mint With BNB");
   let [btnTwo, setButtonTwo] = useState("Mint With YULE");
-  let [btnThree, setButtonThree] = useState("Mint With Busd");
   const [inputdatahere, setinputdatahere] = useState("100");
   const [showModal, setShowModal] = useState(false);
-  const [showModal2, setShowModal2] = useState(false);
 
-  const [showModal3, setShowModal3] = useState(false);
 
-  const [subMitFunction, setsubMitFunction] = useState();
   const [ImgeURL, setImgeURL] = useState();
 
-  const increaseValue = () => {
-    if (value < 5) {
-      setValue(++value);
-      console.log("setValue", value);
-    }
-  };
+ 
 
-  const decreaseValue = () => {
-    if (value > 1) {
-      setValue(--value);
-      console.log("setValue", value);
-    }
-  };
   const handleClose = () => {
     setShowModal(false);
   };
@@ -117,7 +92,6 @@ export default function Mint_With_300() {
     }
   };
   const myMintWire = async () => {
-    setShowModal2(false);
     let simplleArray = [];
 
     let acc = await loadWeb3();
@@ -139,8 +113,8 @@ export default function Mint_With_300() {
             ULE_NFT_300
           );
           let uleContractOf = new web3.eth.Contract(
-            wireTokenAbi,
-            wireTokenAddress
+            uleTokenAbi,
+            uleTokenAddress
           );
           let totalnft = await nftContractOf.methods.maxBatchSize().call();
 

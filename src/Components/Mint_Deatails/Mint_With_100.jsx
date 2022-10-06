@@ -13,7 +13,7 @@ import {
   busdNftTokenAddress,
   busdNftTokenAbi,
 } from "../../utilies/Bsc_contract";
-import { wireTokenAddress, wireTokenAbi } from "../../utilies/Bsc_contract";
+import { uleTokenAddress, uleTokenAbi } from "../../utilies/Bsc_contract";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
@@ -299,8 +299,8 @@ export default function Mint_With_100() {
           );
 
           let uleContractOf = new web3.eth.Contract(
-            wireTokenAbi,
-            wireTokenAddress
+            uleTokenAbi,
+            uleTokenAddress
           );
           let totalnft = await nftContractOf.methods.maxBatchSize().call();
 
@@ -329,6 +329,7 @@ export default function Mint_With_100() {
             // let val1 = 10;
             // mintingULEPrice = web3.utils.toWei(parseFloat(val1).toString());
             // console.log("mintingULEPrice", mintingULEPrice);
+
             let mintingBNBPrice = await axios.get(
               "https://ulematic-api.herokuapp.com/live_rate_bnb"
             );
@@ -401,7 +402,7 @@ export default function Mint_With_100() {
                       address: acc,
                       nft: value,
                       token: mintingULEPrice,
-                      usd: "200",
+                      usd: "100",
                       nftcontract: ULE_NFT_100,
                       url: ImgeURL,
                       //   "txn": hash

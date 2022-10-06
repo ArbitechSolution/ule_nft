@@ -7,23 +7,15 @@ import { loadWeb3 } from "../../apis/api";
 import {
   ULE_NFT_500,
   ULE_NFT_500_ABI,
-  wireNftContractAbi,
-  wireNftContractAddress,
-  ULE_NFT_100,
-  ULE_NFT_100_ABI,
 } from "../../utilies/Bsc_contract";
 import { getSignatureTest } from "../../apis/signature";
-import {
-  busdNftTokenAddress,
-  busdNftTokenAbi,
-} from "../../utilies/Bsc_contract";
-import { wireTokenAddress, wireTokenAbi } from "../../utilies/Bsc_contract";
+
+import { uleTokenAddress, uleTokenAbi } from "../../utilies/Bsc_contract";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 import Web3 from "web3";
-import { Link } from "react-router-dom";
 
 export default function Mint_With_500() {
   let [btnTxt, setBtTxt] = useState("Connect");
@@ -70,31 +62,12 @@ export default function Mint_With_500() {
   let [mintPriceBnb, setMintPriceBnb] = useState(0);
   let [mintPriceBUSD, setMintPriceBUSD] = useState(0);
   let [mintPriceWire, setmintPriceWire] = useState(0);
-  let [btnOne, setButtonOne] = useState("Mint With BNB");
   let [btnTwo, setButtonTwo] = useState("Mint With YULE");
-  let [btnThree, setButtonThree] = useState("Mint With Busd");
   const [inputdatahere, setinputdatahere] = useState("100");
   const [showModal, setShowModal] = useState(false);
-  const [showModal2, setShowModal2] = useState(false);
 
-  const [showModal3, setShowModal3] = useState(false);
   const [ImgeURL, setImgeURL] = useState();
 
-  const [subMitFunction, setsubMitFunction] = useState();
-
-  const increaseValue = () => {
-    if (value < 5) {
-      setValue(++value);
-      console.log("setValue", value);
-    }
-  };
-
-  const decreaseValue = () => {
-    if (value > 1) {
-      setValue(--value);
-      console.log("setValue", value);
-    }
-  };
   const handleClose = () => {
     setShowModal(false);
   };
@@ -118,7 +91,6 @@ export default function Mint_With_500() {
     }
   };
   const myMintWire = async () => {
-    setShowModal2(false);
     let simplleArray = [];
 
     let acc = await loadWeb3();
@@ -136,8 +108,8 @@ export default function Mint_With_500() {
             ULE_NFT_500
           );
           let uleContractOf = new web3.eth.Contract(
-            wireTokenAbi,
-            wireTokenAddress
+            uleTokenAbi,
+            uleTokenAddress
           );
           let totalnft = await nftContractOf.methods.maxBatchSize().call();
           let accountBalance = await web3.eth.getBalance(acc);
@@ -146,7 +118,6 @@ export default function Mint_With_500() {
           } else {
             let maxSupply = await nftContractOf.methods.collectionSize().call();
             let ttlSupply = await nftContractOf.methods.totalSupply().call();
-            let paused = await nftContractOf.methods.paused().call();
             let maxLimitprTransaction = await nftContractOf.methods
               .maxBatchSize()
               .call();
@@ -250,37 +221,8 @@ export default function Mint_With_500() {
                     }
                   );
 
-                  // toast.success("Success", postapi.data.data)
                   setButtonTwo("Mint With YULE");
                   setinputdatahere(" ");
-
-                  // let BusdPrice = await nftContractOf.methods.WhitelistMinitngPricein_MMX().call();
-                  // let z = value * BusdPrice;
-
-                  // await wireContractOf.methods.approve(wireNftContractAddress, z).send({
-                  //     from: acc
-                  // })
-                  // toast.success("Transaction Confirmed")
-                  // setButtonTwo("Please Wait for Second Confirmation")
-                  // let hash = await nftContractOf.methods.mint_with_MMX(value, z.toString()).send({
-                  //     from: acc,
-                  // })
-                  // toast.success("Transaction Succefful")
-                  // setButtonTwo("Mint With YULE")
-                  // // console.log("hash", hash.transactionHash);
-                  // hash = hash.transactionHash
-                  // let postapi = await axios.post('https://whenftapi.herokuapp.com/buynfttoken', {
-                  //     "uid": inputdatahere,
-                  //     "address": acc,
-                  //     "nft": value,
-                  //     "token": z,
-                  //     "txn": hash
-                  // })
-                  // toast.success("Transaction Confirmed")
-
-                  // // console.log("postapi", postapi);
-                  // toast.success("Success", postapi.data.data)
-                  // setinputdatahere(" ")
                 } else {
                   toast.info("You're balance is Low");
                 }

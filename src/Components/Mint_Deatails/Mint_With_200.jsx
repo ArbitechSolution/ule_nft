@@ -1,28 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-import { HiChevronDoubleRight } from "react-icons/hi";
-import { HiChevronDoubleLeft } from "react-icons/hi";
 import { loadWeb3 } from "../../apis/api";
 
 import {
   ULE_NFT_200,
-  ULE_NFT_100,
   ULE_NFT_200_ABI,
-  ULE_NFT_100_ABI,
-  wireNftContractAbi,
-  wireNftContractAddress,
+
 } from "../../utilies/Bsc_contract";
-import {
-  busdNftTokenAddress,
-  busdNftTokenAbi,
-} from "../../utilies/Bsc_contract";
-import { wireTokenAddress, wireTokenAbi } from "../../utilies/Bsc_contract";
+
+import { uleTokenAddress, uleTokenAbi } from "../../utilies/Bsc_contract";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 import Web3 from "web3";
-import { Link } from "react-router-dom";
 import { getSignatureTest } from "../../apis/signature";
 
 export default function Mint_With_200() {
@@ -47,7 +38,6 @@ export default function Mint_With_200() {
 
     await window.ethereum.enable();
     let acc = await loadWeb3();
-    // console.log("ACC=",acc)
     if (acc == "No Wallet") {
       setBtTxt("No Wallet");
     } else if (acc == "Wrong Network") {
@@ -66,35 +56,16 @@ export default function Mint_With_200() {
   let [imageArray, setImageArray] = useState([]);
 
   let [value, setValue] = useState(1);
-  let [point, setPoint] = useState(0);
   let [mintPriceBnb, setMintPriceBnb] = useState(0);
   let [mintPriceBUSD, setMintPriceBUSD] = useState(0);
   let [mintPriceWire, setmintPriceWire] = useState(0);
-  let [btnOne, setButtonOne] = useState("Mint With BNB");
   let [btnTwo, setButtonTwo] = useState("Mint With YULE");
-  let [btnThree, setButtonThree] = useState("Mint With Busd");
   const [inputdatahere, setinputdatahere] = useState("100");
   const [showModal, setShowModal] = useState(false);
-  const [showModal2, setShowModal2] = useState(false);
 
-  const [showModal3, setShowModal3] = useState(false);
-
-  const [subMitFunction, setsubMitFunction] = useState();
   const [ImgeURL, setImgeURL] = useState();
 
-  const increaseValue = () => {
-    if (value < 5) {
-      setValue(++value);
-      console.log("setValue", value);
-    }
-  };
-
-  const decreaseValue = () => {
-    if (value > 1) {
-      setValue(--value);
-      console.log("setValue", value);
-    }
-  };
+ 
   const handleClose = () => {
     setShowModal(false);
   };
@@ -116,7 +87,6 @@ export default function Mint_With_200() {
   };
 
   const myMintWire = async () => {
-    setShowModal2(false);
     let simplleArray = [];
     let acc = await loadWeb3();
     if (acc == "No Wallet") {
@@ -139,8 +109,8 @@ export default function Mint_With_200() {
             ULE_NFT_200
           );
           let uleContractOf = new web3.eth.Contract(
-            wireTokenAbi,
-            wireTokenAddress
+            uleTokenAbi,
+            uleTokenAddress
           );
           let totalnft = await nftContractOf.methods.maxBatchSize().call();
 
@@ -177,7 +147,6 @@ export default function Mint_With_200() {
             // mintingBNBPrice = web3.utils.toWei(parseFloat(val).toString());
             // console.log("totalMintingPriceWire", mintingBNBPrice);
 
-            // if (llisted_check == 'true') {
 
             if (parseInt(ttlSupply) < parseInt(maxSupply)) {
               if (value < parseInt(maxLimitprTransaction)) {

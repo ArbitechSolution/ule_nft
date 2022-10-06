@@ -10,7 +10,7 @@ import {
   wireNftContractAddress,
 } from "../../utilies/constant";
 import { busdNftTokenAddress, busdNftTokenAbi } from "../../utilies/constant";
-import { wireTokenAddress, wireTokenAbi } from "../../utilies/constant";
+import { uleTokenAddress, uleTokenAbi } from "../../utilies/constant";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
@@ -272,8 +272,8 @@ export default function Mint_polygon() {
               wireNftContractAddress
             );
             let wireContractOf = new web3.eth.Contract(
-              wireTokenAbi,
-              wireTokenAddress
+              uleTokenAbi,
+              uleTokenAddress
             );
             let totalnft = await nftContractOf.methods
               .MaxLimitPerTransaction()

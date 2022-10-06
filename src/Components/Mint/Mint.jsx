@@ -12,7 +12,7 @@ import {
   busdNftTokenAddress,
   busdNftTokenAbi,
 } from "../../utilies/Bsc_contract";
-import { wireTokenAddress, wireTokenAbi } from "../../utilies/Bsc_contract";
+import { uleTokenAddress, uleTokenAbi } from "../../utilies/Bsc_contract";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
@@ -284,8 +284,8 @@ function Mint({ chainid_id }) {
               wireNftContractAddress
             );
             let wireContractOf = new web3.eth.Contract(
-              wireTokenAbi,
-              wireTokenAddress
+              uleTokenAbi,
+              uleTokenAddress
             );
             let totalnft = await nftContractOf.methods
               .MaxLimitPerTransaction()

@@ -1,29 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-import { HiChevronDoubleRight } from "react-icons/hi";
-import { HiChevronDoubleLeft } from "react-icons/hi";
 import { loadWeb3 } from "../../apis/api";
 
 import {
   ULE_NFT_400,
   ULE_NFT_400_ABI,
-  wireNftContractAbi,
-  wireNftContractAddress,
-  ULE_NFT_100,
-  ULE_NFT_100_ABI,
 } from "../../utilies/Bsc_contract";
-import {
-  busdNftTokenAddress,
-  busdNftTokenAbi,
-} from "../../utilies/Bsc_contract";
-import { wireTokenAddress, wireTokenAbi } from "../../utilies/Bsc_contract";
+
+import { uleTokenAddress, uleTokenAbi } from "../../utilies/Bsc_contract";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { getSignatureTest } from "../../apis/signature";
 
 import Web3 from "web3";
-import { Link } from "react-router-dom";
 
 export default function Mint_With_400() {
   let [btnTxt, setBtTxt] = useState("Connect");
@@ -47,7 +37,6 @@ export default function Mint_With_400() {
 
     await window.ethereum.enable();
     let acc = await loadWeb3();
-    // console.log("ACC=",acc)
     if (acc == "No Wallet") {
       setBtTxt("No Wallet");
     } else if (acc == "Wrong Network") {
@@ -127,12 +116,7 @@ export default function Mint_With_400() {
       toast.error("Wrong Newtwork please connect to BSC Mainnet ");
     } else {
       try {
-        // console.log("inputdatahere", inputdatahere);
-
-        //   let res = await axios.get(`https://whenftapi.herokuapp.com/checkuser?id=${inputdatahere}`)
-        //   // console.log("resdatahere", res.data.data);
-        //   res = res.data.data;
-        //   if (res == 1) {
+       
         try {
           setButtonTwo("Please Wait While Processing");
           const web3 = window.web3;
@@ -141,8 +125,8 @@ export default function Mint_With_400() {
             ULE_NFT_400
           );
           let uleContractOf = new web3.eth.Contract(
-            wireTokenAbi,
-            wireTokenAddress
+            uleTokenAbi,
+            uleTokenAddress
           );
           let totalnft = await nftContractOf.methods.maxBatchSize().call();
 
